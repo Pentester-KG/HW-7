@@ -66,11 +66,11 @@ def select_all_products(connection):
         print(e)
 
 
-def select_products(connection, limit):
-    sql = '''SELECT * FROM products WHERE price <= ?'''
+def select_products(connection, limit, price):
+    sql = ''''SELECT * FROM products WHERE price <= ? and quantity > ?'''
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (limit,))
+        cursor.execute(sql, (limit, price))
 
         rows = cursor.fetchall()
         for row in rows:
@@ -117,7 +117,7 @@ def find_by_keyword(connection, keyword):
 # products(my_connection, ('Pelmeni', 100, 14))
 # products(my_connection, ('Juice', 130, 11))
 # find_by_keyword(my_connection, 'Мыло')
-# select_products(my_connection, 100)
+# select_products(my_connection, 100, 5)
 # select_all_products(my_connection)
 # products(my_connection, ('Milk', 80, 6))
 # delete_products(my_connection, 20)
